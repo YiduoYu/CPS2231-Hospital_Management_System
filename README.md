@@ -1,54 +1,32 @@
-#  Hospital Management System (HMS)
+# CPS2231-Hospital_Management_System
 
-A simple Java-based hospital management system built for CPS2231 coursework. The system supports basic hospital operations such as doctor login, patient consultation records, and billing.
+Final project for **CPS 2231 Computer Programming** at Wenzhou-Kean University (Instructor: Prof. Wu).
 
-> Developed by Yu Yiduo  
-> Course: CPS2231 
-> Instructor: Prof. Wu
+A command-line hospital management system in Java, built around object-oriented design and binary serialization for persistent storage.
 
----
+![UML diagram](HMS-UML.jpg)
 
-##  Features
+## Features
+- Doctor registration and login
+- Patient consultation records entered by the attending doctor
+- Billing for consultations through a `Tradable` interface
+- Persistent storage of admin, doctor, and patient objects via `ObjectOutputStream` / `ObjectInputStream`
 
-- **Doctor Registration & Login**  
-  Doctors can create their own accounts and log in with ID and password.
+## Project structure
+```
+src/edu/wku/hospital/management/
+├── frame/       HospitalManagementSystem (entry point and menus)
+├── model/       Person, Doctor, Patient, Hospital, Tradable
+├── service/     IOManager (serialization helpers)
+└── exception/   NotFoundException, TransactionFailedException
+tmp/             serialized data and system log, read at startup
+```
 
-- **Consultation Record**  
-  Doctors can input patient information and record consultation notes.
+## Running
+```bash
+javac -d out $(find src -name "*.java")
+java -cp out edu.wku.hospital.management.frame.HospitalManagementSystem
+```
+Run from the repository root so the program can find `./tmp/`.
 
-- **Billing System**  
-  Patients are able to pay medical bills based on the consultation.
-
-- **Persistent Storage**  
-  All records (doctors, patients, admin, system logs) are saved to local files using binary I/O.
-
----
-
-##  System Construction
-
-- **Main Components**:
-    - `Doctor` (Admin)
-    - `Patient`
-    - `HMS` (Main system frame)
-    - `MedicalRecord`
-
-- **Storage Design**:
-    - `./tmp/admin` — Admin data (binary)
-    - `./tmp/doctors` — Doctor accounts (binary)
-    - `./tmp/patient` — Patient records (binary)
-    - `./tmp/system.txt` — System logs
-    - `./desktop/records/patients.txt` — Output of patient info for viewing
-
-- Uses `ObjectInputStream` / `ObjectOutputStream` for reading and writing serialized objects.
-
----
-
-## Technologies Used
-
-- Java
-- File I/O (Binary serialization)
-- Command-line interface
-
-
-
-
+The slides used for the final presentation are in `Hospital Management System.pptx`.
